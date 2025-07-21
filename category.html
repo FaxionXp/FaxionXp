@@ -71,6 +71,29 @@
             transition: filter 0.3s ease-out;
         }
         body.menu-open .navbar-links { filter: none; }
+
+        /* Loading Animation */
+        .loader {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile Search Bar Visibility on Scroll */
+        #mobile-search-bar-container {
+            transition: transform 0.3s ease-in-out; /* Added for smooth hide/show */
+        }
+        .hidden-search-bar {
+            transform: translateY(-100%); /* Hides the search bar by moving it up */
+        }
     </style>
 </head>
 <body class="bg-[#F8F5F0] text-gray-800 leading-relaxed">
@@ -172,6 +195,10 @@
         </div>
     </template>
 
+    <div id="loading" class="fixed inset-0 bg-white bg-opacity-75 flex items-center justify-center z-50">
+        <div class="loader"></div>
+    </div>
+
     <script>
         // --- Data Simulation (Same as index.html) ---
         async function fetchProductData() {
@@ -189,10 +216,13 @@
                     discount: parseInt(item.discount),
                     image: item.image,
                     category: item.category,
-                    section: item.section
+                    section: item.section,
+                    affiliateLink: item.affiliateLink || '#' // Ensure affiliateLink is also mapped
                 }));
 
                 // Hardcoded data for demonstration if Google Apps Script is not set up
+                // This part will only be active if the above fetch fails or is commented out
+                /*
                 return new Promise(resolve => {
                     setTimeout(() => {
                         resolve([
@@ -226,6 +256,7 @@
                         ]);
                     }, 500);
                 });
+                */
             } catch (error) {
                 console.error('Error fetching product data:', error);
                 throw error;
@@ -243,15 +274,10 @@
             const productCardTemplate = document.getElementById('product-card-template');
 
             if (products.length === 0) {
-                // Only show "No products found" if it's a primary display area, not a carousel that might just be empty
-                if (containerId.includes('products-grid')) { // Check if it's the category grid
-                    document.getElementById('no-products-message').classList.remove('hidden');
-                }
+                document.getElementById('no-products-message').classList.remove('hidden');
                 return;
             } else {
-                if (containerId.includes('products-grid')) {
-                    document.getElementById('no-products-message').classList.add('hidden');
-                }
+                document.getElementById('no-products-message').classList.add('hidden');
             }
 
             products.forEach(product => {
@@ -325,6 +351,9 @@
 
         // --- Category Page Specific Logic ---
         document.addEventListener('DOMContentLoaded', async () => {
+            const loadingElement = document.getElementById('loading'); // Get the loading element
+            loadingElement.style.display = 'flex'; // Show loading animation
+
             const urlParams = new URLSearchParams(window.location.search);
             const categoryType = urlParams.get('type');
             const categoryTitleElement = document.getElementById('category-title');
@@ -341,12 +370,37 @@
                 } catch (error) {
                     console.error('Error loading category products:', error);
                     productsGrid.innerHTML = '<p class="text-center text-red-500">Failed to load products for this category. Please try again later.</p>';
+                } finally {
+                    loadingElement.style.display = 'none'; // Hide loading animation
                 }
             } else {
                 categoryTitleElement.textContent = 'All Products';
                 document.getElementById('no-products-message').classList.remove('hidden');
                 document.getElementById('no-products-message').textContent = 'No category selected. Please select a category from the homepage.';
+                loadingElement.style.display = 'none'; // Hide loading animation even if no category
             }
+        });
+
+        // Mobile Search Bar Visibility on Scroll (Added for category.html)
+        let lastScrollTop = 0;
+        const mobileSearchBar = document.getElementById('mobile-search-bar-container');
+        const navbar = document.querySelector('header'); // Assuming your header is the navbar
+
+        window.addEventListener('scroll', () => {
+            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Only apply this logic for mobile viewports (adjust breakpoint as needed)
+            if (window.innerWidth < 768) {
+                // If scrolling down, hide the search bar
+                if (currentScrollTop > lastScrollTop && currentScrollTop > navbar.offsetHeight) {
+                    mobileSearchBar.classList.add('hidden-search-bar');
+                }
+                // If scrolling up, show the search bar
+                else if (currentScrollTop < lastScrollTop) {
+                    mobileSearchBar.classList.remove('hidden-search-bar');
+                }
+            }
+            lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // For Mobile or negative scrolling
         });
     </script>
 </body>
