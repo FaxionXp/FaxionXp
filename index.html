@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FaxionXp - Timeless Elegance</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Optional: Google Fonts for a nicer look (Playfair Display for headings, Inter for body) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Embedded Custom CSS -->
     <style>
         /* Apply Google Fonts */
         @font-face {
@@ -137,16 +134,34 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* More prominent shadow */
             z-index: 2; /* Bring focused item slightly forward */
         }
+
+        /* Loading Animation */
+        .loader {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile Search Bar Visibility on Scroll */
+        #mobile-search-bar-container {
+            transition: transform 0.3s ease-in-out; /* Added for smooth hide/show */
+        }
+        .hidden-search-bar {
+            transform: translateY(-100%); /* Hides the search bar by moving it up */
+        }
     </style>
 </head>
-<body id="home" class="bg-[#F8F5F0] text-gray-800 leading-relaxed"> <!-- Very light cream background -->
-
-    <!-- Navbar Section -->
-    <header class="bg-[#2D3A4B] text-white p-4 shadow-lg fixed w-full top-0 left-0 z-50 flex justify-between items-center px-6 md:px-10 h-[56px]"> <!-- Deep muted blue -->
-        <div class="flex flex-shrink-0 gap-1">
+<body id="home" class="bg-[#F8F5F0] text-gray-800 leading-relaxed"> <header class="bg-[#2D3A4B] text-white p-4 shadow-lg fixed w-full top-0 left-0 z-50 flex justify-between items-center px-6 md:px-10 h-[56px]"> <div class="flex flex-shrink-0 gap-1">
             <img src="./fashionlogo.png" alt="logo" class="rounded-full mb-1 h-7">      
-            <a href="#" class="logo text-[#D4AF37] text-xl md:text-2xl font-bold tracking-wide transition-colors duration-300 hover:text-[#C0A020]" style=>FaxionXp</a> <!-- Muted gold accent -->
-        </div>
+            <a href="#" class="logo text-[#D4AF37] text-xl md:text-2xl font-bold tracking-wide transition-colors duration-300 hover:text-[#C0A020]" style=>FaxionXp</a> </div>
         <nav id="main-nav-links" class="navbar-links">
             <ul class="flex flex-col space-y-4">
                 <li><a href="index.html" class="text-base font-medium hover:text-[#D4AF37] transition-colors duration-300 relative group">Home<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span></a></li>
@@ -160,7 +175,6 @@
             <div class="relative hidden md:block">
                 <input type="text" id="desktop-search-input" placeholder="Search with #" class="py-1.5 px-3 pr-9 rounded-full bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] w-40 transition-all duration-300 text-sm">
                 <button type="submit" id="desktop-search-button" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 hover:text-[#D4AF37] transition-colors duration-300">
-                    <!-- Search Icon (SVG from Lucide React or similar) -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                 </button>
             </div>
@@ -172,20 +186,15 @@
         </div>
     </header>
 
-    <!-- Mobile Search Bar (appears just after navbar on mobile) -->
-    <!-- Navbar height is approx 56px -->
     <div id="mobile-search-bar-container" class="block md:hidden bg-[#2D3A4B] py-3 px-6 shadow-md fixed w-full top-[56px] left-0 z-40 h-[64px]">
         <div class="relative flex items-center w-full max-w-md mx-auto">
             <input type="text" id="mobile-search-input" placeholder="Search with #" class="py-2 px-4 pr-10 rounded-full bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] w-full transition-all duration-300">
             <button type="submit" id="mobile-search-button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-[#D4AF37] transition-colors duration-300">
-                <!-- Search Icon -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             </button>
         </div>
     </div>
 
-    <!-- Mobile Categories Section (appears after search bar on mobile, horizontal scroll) -->
-    <!-- Navbar (56px) + Mobile Search (64px) = 120px -->
     <section id="mobile-categories-container" class="block md:hidden bg-gray-200 py-2 px-4 shadow-md relative w-full top-[120px] left-0 z-30 overflow-x-auto whitespace-nowrap mobile-categories-scroll h-[80px] flex items-center">
         <div class="flex space-x-6 py-1">
             <a href="category.html?type=Men" class="flex-shrink-0 flex flex-col items-center text-gray-800 text-sm hover:text-[#D4AF37] transition-colors duration-300">
@@ -223,22 +232,16 @@
         </div>
     </section>
 
-    <!-- Main Content Area -->
-    <!-- Adjusted padding to clear fixed navbar (~56px) + mobile search bar (~64px) + mobile categories (~80px) = ~200px -->
     <main class="pt-[100px] md:pt-[56px]">
-        <!-- Hero Slider Section -->
         <section id="hero-slider" class="relative w-full h-[400px] md:h-[500px] overflow-hidden">
             <div id="slides-container" class="absolute inset-0 flex transition-transform duration-1000 ease-in-out">
-                <!-- Slide 1 -->
-                <div class="slide flex-shrink-0 w-full h-full bg-cover bg-center flex items-center justify-center text-center text-white relative" style="background-image: url('./unisexStreet.png');"> <!-- Dark blue background for hero image -->
-                    <div class="absolute inset-0 bg-black opacity-30 z-10"></div>
+                <div class="slide flex-shrink-0 w-full h-full bg-cover bg-center flex items-center justify-center text-center text-white relative" style="background-image: url('./unisexStreet.png');"> <div class="absolute inset-0 bg-black opacity-30 z-10"></div>
                     <div class="relative z-20 max-w-3xl p-6">
                         <h1 class="hero-heading text-3xl md:text-4xl font-extrabold mb-3 drop-shadow-md text-white"></h1>
                         <p class="text-base md:text-lg font-light mb-6 text-white"></p>
                         <a href="#new-arrivals" class="inline-block bg-[#D4AF37] text-[#2D3A4B] px-5 py-1.5 rounded-full text-sm font-semibold shadow-lg hover:bg-[#C0A020] hover:scale-105 transition-all duration-300 ease-in-out">Shop Now</a>
                     </div>
                 </div>
-                <!-- Slide 2 -->
                 <div class="slide flex-shrink-0 w-full h-full bg-cover bg-center flex items-center justify-center text-center text-white relative" style="background-image: url('./mensStreet.png');">
                     <div class="absolute inset-0 bg-black opacity-30 z-10"></div>
                     <div class="relative z-20 max-w-3xl p-6">
@@ -247,16 +250,14 @@
                         <a href="category.html?type=Men" class="inline-block bg-[#D4AF37] text-[#2D3A4B] px-5 py-1.5 rounded-full text-sm font-semibold shadow-lg hover:bg-[#C0A020] hover:scale-105 transition-all duration-300 ease-in-out">Explore Men's</a>
                     </div>
                 </div>
-                <!-- Slide 3 -->
                 <div class="slide flex-shrink-0 w-full h-full bg-cover bg-center flex items-center justify-center text-center text-white relative" style="background-image: url('./womenStreet.png');">
                     <div class="absolute inset-0 bg-black opacity-30 z-10"></div>
                     <div class="relative z-20 max-w-3xl p-6">
                         <h1 class="hero-heading text-3xl md:text-4xl font-extrabold mb-3 drop-shadow-md text-white"></h1>
                         <p class="text-base md:text-lg font-light mb-6 text-white"></p>
-                        <a href="category.html?type=Men" class="inline-block bg-[#D4AF37] text-[#2D3A4B] px-5 py-1.5 rounded-full text-sm font-semibold shadow-lg hover:bg-[#C0A020] hover:scale-105 transition-all duration-300 ease-in-out">Explore Women's</a>
+                        <a href="category.html?type=Women" class="inline-block bg-[#D4AF37] text-[#2D3A4B] px-5 py-1.5 rounded-full text-sm font-semibold shadow-lg hover:bg-[#C0A020] hover:scale-105 transition-all duration-300 ease-in-out">Explore Women's</a>
                     </div>
                 </div>
-                <!-- Slide 4 -->
                 <div class="slide flex-shrink-0 w-full h-full bg-cover bg-center flex items-center justify-center text-center text-white relative" style="background-image: url('./menFormal.png');">
                     <div class="absolute inset-0 bg-black opacity-30 z-10"></div>
                     <div class="relative z-20 max-w-3xl p-6">
@@ -265,7 +266,6 @@
                         <a href="category.html?type=Men" class="inline-block bg-[#D4AF37] text-[#2D3A4B] px-5 py-1.5 rounded-full text-sm font-semibold shadow-lg hover:bg-[#C0A020] hover:scale-105 transition-all duration-300 ease-in-out">Explore Men's</a>
                     </div>
                 </div>
-                <!-- Slide 5 -->
                 <div class="slide flex-shrink-0 w-full h-full bg-cover bg-center flex items-center justify-center text-center text-white relative" style="background-image: url('./womenFormal.png');">
                     <div class="absolute inset-0 bg-black opacity-30 z-10"></div>
                     <div class="relative z-20 max-w-3xl p-6">
@@ -276,7 +276,6 @@
                 </div>
             </div>
 
-            <!-- Slider Navigation Dots -->
             <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-30">
                 <div class="dot w-2.5 h-2.5 bg-gray-300 rounded-full cursor-pointer transition-colors duration-300 hover:bg-[#D4AF37]" data-slide="0"></div>
                 <div class="dot w-2.5 h-2.5 bg-gray-300 rounded-full cursor-pointer transition-colors duration-300 hover:bg-[#D4AF37]" data-slide="1"></div>
@@ -286,13 +285,10 @@
             </div>
         </section>
 
-        <!-- New Arrivals Section -->
         <section id="new-arrivals" class="py-10 px-4 md:px-8 max-w-7xl mx-auto text-center relative">
             <h2 class="section-title text-xl md:text-3xl font-bold text-[#03045E] mb-8">New Arrivals</h2>
             <div id="new-arrivals-products" class="flex overflow-x-auto pb-4 space-x-4 horizontal-scroll-products">
-                <!-- Product cards will be dynamically inserted here by JavaScript -->
-            </div>
-            <!-- Navigation Buttons for Desktop -->
+                </div>
             <button id="new-arrivals-left" class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 bg-[#C0A020] text-white p-2 rounded-full shadow-lg hover:bg-[#D4AF37] transition-colors duration-300 z-10">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
             </button>
@@ -301,13 +297,8 @@
             </button>
         </section>
 
-        <!-- Best Seller Section -->
-        <section id="best-seller" class="py-10 px-4 md:px-8 max-w-7xl mx-auto text-center bg-[#F8F5F0] rounded-xl shadow-inner my-12 relative"> <!-- Light cream background -->
-            <h2 class="section-title text-xl md:text-3xl font-bold text-[#03045E] mb-8">Best Seller</h2> <!-- Darkest blue title -->
-            <div id="best-seller-products" class="flex overflow-x-auto pb-4 space-x-4 horizontal-scroll-products">
-                <!-- Product cards will be dynamically inserted here by JavaScript -->
-            </div>
-            <!-- Navigation Buttons for Desktop -->
+        <section id="best-seller" class="py-10 px-4 md:px-8 max-w-7xl mx-auto text-center bg-[#F8F5F0] rounded-xl shadow-inner my-12 relative"> <h2 class="section-title text-xl md:text-3xl font-bold text-[#03045E] mb-8">Best Seller</h2> <div id="best-seller-products" class="flex overflow-x-auto pb-4 space-x-4 horizontal-scroll-products">
+                </div>
             <button id="best-seller-left" class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 bg-[#C0A020] text-white p-2 rounded-full shadow-lg hover:bg-[#D4AF37] transition-colors duration-300 z-10">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
             </button>
@@ -316,13 +307,8 @@
             </button>
         </section>
 
-        <!-- Trending Products Section -->
-        <section id="trending-products" class="py-10 px-4 md:px-8 max-w-7xl mx-auto text-center bg-[#F8F5F0] rounded-xl shadow-inner my-12 relative"> <!-- Light cream background -->
-            <h2 class="section-title text-xl md:text-3xl font-bold text-[#03045E] mb-8">Trending Products</h2> <!-- Darkest blue title -->
-            <div id="trending-products-carousel" class="flex overflow-x-auto pb-4 space-x-4 horizontal-scroll-products">
-                <!-- Product cards will be dynamically inserted here by JavaScript -->
-            </div>
-            <!-- Navigation Buttons for Desktop -->
+        <section id="trending-products" class="py-10 px-4 md:px-8 max-w-7xl mx-auto text-center bg-[#F8F5F0] rounded-xl shadow-inner my-12 relative"> <h2 class="section-title text-xl md:text-3xl font-bold text-[#03045E] mb-8">Trending Products</h2> <div id="trending-products-carousel" class="flex overflow-x-auto pb-4 space-x-4 horizontal-scroll-products">
+                </div>
             <button id="trending-products-left" class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 bg-[#C0A020] text-white p-2 rounded-full shadow-lg hover:bg-[#D4AF37] transition-colors duration-300 z-10">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
             </button>
@@ -331,13 +317,8 @@
             </button>
         </section>
 
-        <!-- Latest Collections Section -->
-        <section id="latest-collections" class="py-10 px-4 md:px-8 max-w-7xl mx-auto text-center bg-[#F8F5F0] rounded-xl shadow-inner my-12 relative"> <!-- Light cream background -->
-            <h2 class="section-title text-xl md:text-3xl font-bold text-[#03045E] mb-8">Latest Collections</h2> <!-- Darkest blue title -->
-            <div id="latest-collections-products" class="flex overflow-x-auto pb-4 space-x-4 horizontal-scroll-products">
-                <!-- Product cards will be dynamically inserted here by JavaScript -->
-            </div>
-            <!-- Navigation Buttons for Desktop -->
+        <section id="latest-collections" class="py-10 px-4 md:px-8 max-w-7xl mx-auto text-center bg-[#F8F5F0] rounded-xl shadow-inner my-12 relative"> <h2 class="section-title text-xl md:text-3xl font-bold text-[#03045E] mb-8">Latest Collections</h2> <div id="latest-collections-products" class="flex overflow-x-auto pb-4 space-x-4 horizontal-scroll-products">
+                </div>
             <button id="latest-collections-left" class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 bg-[#C0A020] text-white p-2 rounded-full shadow-lg hover:bg-[#D4AF37] transition-colors duration-300 z-10">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
             </button>
@@ -346,28 +327,20 @@
             </button>
         </section>
 
-        <!-- Shop by Category Section -->
-        <section id="shop-by-category" class="py-12 px-4 md:px-8 max-w-7xl mx-auto text-center bg-[#F8F5F0] rounded-xl shadow-inner my-12 relative"> <!-- Light cream background -->
-            <h2 class="section-title text-xl md:text-3xl font-bold text-[#03045E] mb-8">Shop by Category</h2> <!-- Darkest blue title -->
-            <div id="category-grid-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
-                <!-- Category cards will be dynamically inserted here by JavaScript -->
-            </div>
+        <section id="shop-by-category" class="py-12 px-4 md:px-8 max-w-7xl mx-auto text-center bg-[#F8F5F0] rounded-xl shadow-inner my-12 relative"> <h2 class="section-title text-xl md:text-3xl font-bold text-[#03045E] mb-8">Shop by Category</h2> <div id="category-grid-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                </div>
             <div class="mt-10">
                 <a href="#" class="inline-block bg-[#0077B6] text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-[#00B4D8] hover:scale-105 transition-all duration-300 ease-in-out">Explore All Categories</a>
             </div>
         </section>
     </main>
 
-    <!-- Footer Section -->
-    <footer class="bg-[#0077B6] text-white py-12 px-6 md:px-10 text-center"> <!-- Medium blue background -->
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-left md:text-center">
+    <footer class="bg-[#0077B6] text-white py-12 px-6 md:px-10 text-center"> <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-left md:text-center">
             <div class="footer-section">
-                <h3 class="text-xl font-bold text-[#00B4D8] mb-4">About FaxionXp</h3> <!-- Cyan blue accent -->
-                <p class="text-white text-sm">Welcome to FaxionXp – we help you create your identity by giving you the fashion you deserve. We handpick the best-looking and most trending products from top websites like Flipkart, Amazon, AJIO, Myntra, Mamaearth, and more, and bring them directly to your screen. Powered by trusted affiliate links, FaxionXp makes it easy to discover stylish, affordable, and quality fashion – all in one place, just for you.</p>
+                <h3 class="text-xl font-bold text-[#00B4D8] mb-4">About FaxionXp</h3> <p class="text-white text-sm">Your ultimate destination for the latest fashion trends, high-quality apparel, and stylish accessories. Shop with confidence!</p>
             </div>
             <div class="footer-section">
-                <h3 class="text-xl font-bold text-[#00B4D8] mb-4">Quick Links</h3> <!-- Cyan blue accent -->
-                <ul class="space-y-2">
+                <h3 class="text-xl font-bold text-[#00B4D8] mb-4">Quick Links</h3> <ul class="space-y-2">
                     <li><a href="index.html" class="text-white hover:text-[#00B4D8] transition-colors duration-300 text-sm">Home</a></li>
                     <li><a href="#" class="text-white hover:text-[#00B4D8] transition-colors duration-300 text-sm">Privacy Policy</a></li>
                     <li><a href="#" class="text-white hover:text-[#00B4D8] transition-colors duration-300 text-sm">Terms of Service</a></li>
@@ -375,21 +348,16 @@
                 </ul>
             </div>
             <div class="footer-section">
-                <h3 class="text-xl font-bold text-[#00B4D8] mb-4">Follow Us</h3> <!-- Cyan blue accent -->
-                <div class="flex justify-center space-x-4">
-                    <!-- Facebook Icon -->
+                <h3 class="text-xl font-bold text-[#00B4D8] mb-4">Follow Us</h3> <div class="flex justify-center space-x-4">
                     <a href="#" class="inline-flex items-center justify-center w-8 h-8 bg-[#90E0EF] text-[#03045E] rounded-full text-sm font-bold hover:bg-[#00B4D8] hover:scale-110 transition-all duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                     </a>
-                    <!-- Instagram Icon -->
                     <a href="https://www.instagram.com/faxion_xp?igsh=cHJsMGFjZXMyZHhk" class="inline-flex items-center justify-center w-8 h-8 bg-[#90E0EF] text-[#03045E] rounded-full text-sm font-bold hover:bg-[#00B4D8] hover:scale-110 transition-all duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.5" y1="6.5" y2="6.5"/></svg>
                     </a>
-                    <!-- LinkedIn Icon -->
                     <a href="https://in.linkedin.com/in/faxionxp-undefined-969bb3375" class="inline-flex items-center justify-center w-8 h-8 bg-[#90E0EF] text-[#03045E] rounded-full text-sm font-bold hover:bg-[#00B4D8] hover:scale-110 transition-all duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                     </a>
-                    <!-- Telegram Icon (using a custom SVG as it's not in Lucide by default) -->
                     <a href="https://t.me/faxion_deals" class="inline-flex items-center justify-center w-8 h-8 bg-[#90E0EF] text-[#03045E] rounded-full text-sm font-bold hover:bg-[#00B4D8] hover:scale-110 transition-all duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.17 7.41l-3.35 6.42c-.16.33-.49.54-.86.54-.08 0-.17-.01-.25-.03l-4.18-1.25c-.46-.14-.73-.6-.62-1.07.11-.47.56-.75 1.03-.64l3.52.88 1.9-3.8c.11-.22.35-.35.6-.35.24 0 .46.12.58.33.12.21.14.47.05.7-.13.31-.4.5-.72.5L9.6 14.1l-1.5 1.5c-.18.18-.44.27-.7.27-.26 0-.5-.1-.68-.28-.18-.18-.27-.44-.27-.7V9.7c0-.46.28-.88.72-1.07l7.07-2.61c.46-.17.96.06 1.13.52.17.46-.06.96-.52 1.13z"/>
@@ -403,7 +371,6 @@
         </div>
     </footer>
 
-    <!-- Template for Product Card (hidden) -->
     <template id="product-card-template">
         <div class="product-card-item flex-shrink-0 w-48 bg-white rounded-xl shadow-xl p-4 flex flex-col items-center justify-around transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
             <img src="" alt="Product Image" class="w-full h-45 object-cover rounded-lg mb-3 product-image">
@@ -417,16 +384,18 @@
         </div>
     </template>
 
-    <!-- Template for Category Card (hidden) -->
     <template id="category-card-template">
         <a href="#" class="group bg-white rounded-xl shadow-xl overflow-hidden text-gray-800 transition-transform duration-300 hover:scale-105 hover:shadow-2xl w-full max-w-xs category-card-item">
             <img src="" alt="Category Image" class="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-110 category-image">
             <h3 class="text-xl font-semibold py-4 category-name"></h3>
         </a>
     </template>
+    <div id="loading" class="fixed inset-0 bg-white bg-opacity-75 flex items-center justify-center z-50">
+        <div class="loader"></div>
+    </div>
+    <div id="product-container" style="display:none;"></div>
 
 
-    <!-- Embedded JavaScript -->
     <script>
         // --- Data Simulation (Replace with actual Google Sheet API fetch) ---
         // In a real scenario, this data would come from your server-side endpoint
@@ -437,8 +406,6 @@
             const GOOGLE_SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbx1BProeY4onMB7bXsJiWlMm28_DZxw3p4LTVD_MqG3HcsqvESpLgyrBM_TPO2GqOewPQ/exec'; // REPLACE THIS WITH YOUR ACTUAL DEPLOYED URL
 
             try {
-                // For demonstration, we'll still use hardcoded data first.
-                // Uncomment the fetch below and remove the hardcoded resolve once your Apps Script is ready.
                 const response = await fetch(GOOGLE_SHEET_API_URL);
                 const data = await response.json();
                 return data.map(item => ({
@@ -453,37 +420,6 @@
                     affiliateLink: item.affiliateLink || '#' // Assuming an affiliateLink column
                 }));
 
-                return new Promise(resolve => {
-                    setTimeout(() => {
-                        resolve([
-                            // New Arrivals
-                            { id: 'prod001', name: 'Elegant Summer Dress', originalPrice: 79.99, discountedPrice: 69.99, discount: 12, image: 'https://placehold.co/300x300/e0e0e0/333333?text=Elegant+Dress', category: 'Women', section: 'new-arrivals', affiliateLink: 'https://example.com/dress-affiliate-link' },
-                            { id: 'prod002', name: 'Men\'s Casual Polo', originalPrice: 50.00, discountedPrice: 45.00, discount: 10, image: 'https://placehold.co/300x300/d0d0d0/333333?text=Men\'s+Polo', category: 'Men', section: 'new-arrivals', affiliateLink: 'https://example.com/polo-affiliate-link' },
-                            { id: 'prod003', name: 'Chic High Heels', originalPrice: 99.99, discountedPrice: 89.50, discount: 10, image: 'https://placehold.co/300x300/c0c0c0/333333?text=Stylish+Heels', category: 'Footwears', section: 'new-arrivals', affiliateLink: 'https://example.com/heels-affiliate-link' },
-                            { id: 'prod004', name: 'Luxury Beauty Kit', originalPrice: 150.00, discountedPrice: 120.00, discount: 20, image: 'https://placehold.co/300x300/b0b0b0/333333?text=Luxury+Beauty', category: 'Beauty', section: 'new-arrivals', affiliateLink: 'https://example.com/beauty-kit-affiliate-link' },
-                            { id: 'prod005', name: 'Sporty Running Sneakers', originalPrice: 85.00, discountedPrice: 75.00, discount: 12, image: 'https://placehold.co/300x300/a0a0a0/333333?text=Sport+Sneakers', category: 'Footwears', section: 'new-arrivals', affiliateLink: 'https://example.com/sneakers-affiliate-link' },
-                            { id: 'prod006', name: 'Elegant Women\'s Bag', originalPrice: 110.00, discountedPrice: 95.00, discount: 13, image: 'https://placehold.co/300x300/909090/333333?text=Fashion+Handbag', category: 'Women', section: 'new-arrivals', affiliateLink: 'https://example.com/handbag-affiliate-link' },
-
-                            // Best Seller
-                            { id: 'prod007', name: 'Classic White Tee', originalPrice: 25.00, discountedPrice: 19.99, discount: 20, image: 'https://placehold.co/300x300/ff0000/ffffff?text=Best+Seller+1', category: 'Men', section: 'best-seller', affiliateLink: 'https://example.com/tee-affiliate-link' },
-                            { id: 'prod008', name: 'Comfortable Jeans', originalPrice: 60.00, discountedPrice: 49.99, discount: 17, image: 'https://placehold.co/300x300/00ff00/ffffff?text=Best+Seller+2', category: 'Men', section: 'best-seller', affiliateLink: 'https://example.com/jeans-affiliate-link' },
-                            { id: 'prod009', name: 'Stylish Sunglasses', originalPrice: 35.00, discountedPrice: 29.99, discount: 14, image: 'https://placehold.co/300x300/0000ff/ffffff?text=Best+Seller+3', category: 'Accessories', section: 'best-seller', affiliateLink: 'https://example.com/sunglasses-affiliate-link' },
-                            { id: 'prod010', name: 'Leather Wallet', originalPrice: 45.00, discountedPrice: 39.99, discount: 11, image: 'https://placehold.co/300x300/ffff00/000000?text=Best+Seller+4', category: 'Accessories', section: 'best-seller', affiliateLink: 'https://example.com/wallet-affiliate-link' },
-
-                            // Trending Products
-                            { id: 'prod011', name: 'Stylish Denim Jacket', originalPrice: 89.99, discountedPrice: 79.99, discount: 11, image: 'https://placehold.co/300x300/ffcc00/2c3e50?text=Trending+Jacket', category: 'Men', section: 'trending-products', affiliateLink: 'https://example.com/jacket-affiliate-link' },
-                            { id: 'prod012', name: 'Classic Analog Watch', originalPrice: 160.00, discountedPrice: 149.00, discount: 7, image: 'https://placehold.co/300x300/3498db/ecf0f1?text=Classic+Watch', category: 'Accessories', section: 'trending-products', affiliateLink: 'https://example.com/watch-affiliate-link' },
-                            { id: 'prod013', name: 'High-Top Sneakers', originalPrice: 110.00, discountedPrice: 99.00, discount: 10, image: 'https://placehold.co/300x300/e74c3c/ecf0f1?text=Trendy+Sneakers', category: 'Footwears', section: 'trending-products', affiliateLink: 'https://example.com/hightop-sneakers-affiliate-link' },
-                            { id: 'prod014', name: 'Silk Pattern Scarf', originalPrice: 35.00, discountedPrice: 29.99, discount: 14, image: 'https://placehold.co/300x300/9b59b6/ecf0f1?text=Elegant+Scarf', category: 'Women', section: 'trending-products', affiliateLink: 'https://example.com/scarf-affiliate-link' },
-
-                            // Latest Collections
-                            { id: 'prod015', name: 'Spring Collection Dress', originalPrice: 95.00, discountedPrice: 79.99, discount: 16, image: 'https://placehold.co/300x300/800080/ffffff?text=Collection+A', category: 'Women', section: 'latest-collections', affiliateLink: 'https://example.com/spring-dress-affiliate-link' },
-                            { id: 'prod016', name: 'Autumn Blazer', originalPrice: 120.00, discountedPrice: 99.99, discount: 17, image: 'https://placehold.co/300x300/008080/ffffff?text=Collection+B', category: 'Men', section: 'latest-collections', affiliateLink: 'https://example.com/blazer-affiliate-link' },
-                            { id: 'prod017', name: 'Winter Knit Sweater', originalPrice: 70.00, discountedPrice: 59.99, discount: 14, image: 'https://placehold.co/300x300/808000/ffffff?text=Collection+C', category: 'Women', section: 'latest-collections', affiliateLink: 'https://example.com/sweater-affiliate-link' },
-                            { id: 'prod018', name: 'Formal Trousers', originalPrice: 85.00, discountedPrice: 69.99, discount: 18, image: 'https://placehold.co/300x300/000000/ffffff?text=Collection+D', category: 'Men', section: 'latest-collections', affiliateLink: 'https://example.com/trousers-affiliate-link' },
-                        ]);
-                    }, 500);
-                });
             } catch (error) {
                 console.error('Error fetching product data:', error);
                 throw error;
@@ -502,6 +438,12 @@
         ];
 
         let allProducts = []; // To store all fetched products globally
+
+        // Helper function to get a random subset of an array
+        function getRandomSubset(array, size) {
+            const shuffled = array.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, size);
+        }
 
         // --- Dynamic Content Rendering ---
         function renderProducts(products, containerId) {
@@ -761,15 +703,30 @@
 
         // --- Initialization on DOMContentLoaded ---
         document.addEventListener('DOMContentLoaded', async () => {
+            const loadingElement = document.getElementById('loading');
+            const productContainer = document.getElementById('product-container'); 
+
+            loadingElement.style.display = 'flex'; // Show loading animation
+
             // Fetch product data
             try {
                 allProducts = await fetchProductData();
 
-                // Render products for each section
-                renderProducts(allProducts.filter(p => p.section === 'new-arrivals'), 'new-arrivals-products');
-                renderProducts(allProducts.filter(p => p.section === 'best-seller'), 'best-seller-products');
-                renderProducts(allProducts.filter(p => p.section === 'trending-products'), 'trending-products-carousel');
-                renderProducts(allProducts.filter(p => p.section === 'latest-collections'), 'latest-collections-products');
+                // Define the number of random products to show per section
+                const numProductsToShow = 8; // You can adjust this number
+
+                // Filter products by section and then get a random subset
+                const newArrivals = allProducts.filter(p => p.section === 'new-arrivals');
+                renderProducts(getRandomSubset(newArrivals, numProductsToShow), 'new-arrivals-products');
+
+                const bestSellers = allProducts.filter(p => p.section === 'best-seller');
+                renderProducts(getRandomSubset(bestSellers, numProductsToShow), 'best-seller-products');
+
+                const trendingProducts = allProducts.filter(p => p.section === 'trending-products');
+                renderProducts(getRandomSubset(trendingProducts, numProductsToShow), 'trending-products-carousel');
+
+                const latestCollections = allProducts.filter(p => p.section === 'latest-collections');
+                renderProducts(getRandomSubset(latestCollections, numProductsToShow), 'latest-collections-products');
 
                 // Render categories
                 renderCategories(categoryData, 'category-grid-container');
@@ -793,7 +750,31 @@
                 console.error('Error fetching data:', error);
                 // Display a user-friendly error message on the page
                 alert('Failed to load product data. Please try again later.'); // Replace with custom modal
+            } finally {
+                loadingElement.style.display = 'none'; // Hide loading animation regardless of success or failure
             }
+        });
+
+        // Mobile Search Bar Visibility on Scroll
+        let lastScrollTop = 0;
+        const mobileSearchBar = document.getElementById('mobile-search-bar-container');
+        const navbar = document.querySelector('header'); // Assuming your header is the navbar
+
+        window.addEventListener('scroll', () => {
+            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Only apply this logic for mobile viewports (adjust breakpoint as needed)
+            if (window.innerWidth < 768) {
+                // If scrolling down, hide the search bar
+                if (currentScrollTop > lastScrollTop && currentScrollTop > navbar.offsetHeight) {
+                    mobileSearchBar.classList.add('hidden-search-bar');
+                }
+                // If scrolling up, show the search bar
+                else if (currentScrollTop < lastScrollTop) {
+                    mobileSearchBar.classList.remove('hidden-search-bar');
+                }
+            }
+            lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // For Mobile or negative scrolling
         });
     </script>
 </body>
